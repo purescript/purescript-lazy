@@ -1,0 +1,20 @@
+{
+  "name": "purescript-lazy",
+  "version": "0.0.0",
+  "homepage": "https://github.com/purescript/purescript-lazy",
+  "authors": [
+    "Phil Freeman <paf31@cantab.net>"
+  ],
+  "description": "Call-by-need values",
+  "keywords": [
+    "purescript"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "externs",
+    "js"
+  ]
+}
