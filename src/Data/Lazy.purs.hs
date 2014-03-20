@@ -1,7 +1,5 @@
 module Data.Lazy where
 
-import Prelude
-
 foreign import data Lazy :: * -> *
 
 foreign import defer 
