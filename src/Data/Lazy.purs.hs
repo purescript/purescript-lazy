@@ -3,21 +3,22 @@ module Data.Lazy where
 foreign import data Lazy :: * -> *
 
 foreign import defer 
-  "function defer(f) {\
-  \  return (function() {\
-  \    function Lazy(f) {\
-  \      var self = this;\
-  \      var value;\
-  \      self.force = function() {\
-  \        if (self.value === undefined) {\
-  \          self.value = f();\
-  \        }\
-  \        return self.value;\
-  \      };\
-  \    }\
-  \    return new Lazy(f);\
-  \  }());\
-  \}" :: forall a. ({} -> a) -> Lazy a
+  "function defer(thunk) {\
+  \    if (this instanceof defer) {
+  \      this.thunk = thunk;\
+  \      return this;\
+  \    } else {
+  \      return new defer(thunk);
+  \    }
+  \}\
+  \defer.prototype.force = function () {\
+  \    var value = this.thunk();\
+  \    delete this.thunk;\
+  \    this.force = function () {\
+  \        return value;\
+  \    };\
+  \    return value;\
+  \};" :: forall a. ({} -> a) -> Lazy a
 
 foreign import force
   "function force(l) {\
