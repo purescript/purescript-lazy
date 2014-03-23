@@ -4,12 +4,12 @@ foreign import data Lazy :: * -> *
 
 foreign import defer 
   "function defer(thunk) {\
-  \    if (this instanceof defer) {
+  \    if (this instanceof defer) {\
   \      this.thunk = thunk;\
   \      return this;\
-  \    } else {
-  \      return new defer(thunk);
-  \    }
+  \    } else {\
+  \      return new defer(thunk);\
+  \    }\
   \}\
   \defer.prototype.force = function () {\
   \    var value = this.thunk();\
