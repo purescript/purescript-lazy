@@ -16,5 +16,10 @@
     "bower_components",
     "externs",
     "js"
-  ]
+  ],
+  "dependencies": {
+    "purescript-foldable-traversable": "*",
+    "purescript-monoid": "*",
+    "purescript-arrays": "*"
+  }
 }
