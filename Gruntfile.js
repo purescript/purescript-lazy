@@ -2,10 +2,10 @@ module.exports = function(grunt) {
 
     "use strict";
 
-    grunt.initConfig({ 
-    
+    grunt.initConfig({
+
         clean: ["externs", "js"],
-    
+
         "purescript-make": {
             options: {
                 tco: true,
@@ -15,10 +15,11 @@ module.exports = function(grunt) {
                 src:
                     [ "src/**/*.purs.hs"
                     , "bower_components/purescript-*/src/**/*.purs"
+                    , "bower_components/purescript-*/src/**/*.purs.hs"
                     ]
             }
         }
-        
+
     });
 
     grunt.loadNpmTasks("grunt-purescript");
