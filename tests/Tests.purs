@@ -24,6 +24,9 @@ main = do
   quickCheck monadRightIdentity
   quickCheck monadAssociativity
   
+  trace "test show"
+  quickCheck show'
+  
   where
   
   identity :: Number -> Boolean
@@ -45,4 +48,6 @@ main = do
     where
     f x = return $ x * x
     g x = return $ -x
-  
+    
+  show' :: Number -> Boolean
+  show' x = show (defer \_ -> x) == "Lazy " ++ (show x)

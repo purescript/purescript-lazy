@@ -44,7 +44,7 @@ instance ordLazy :: (Ord a) => Ord (Lazy a) where
   compare x y = compare (force x) (force y)
   
 instance showLazy :: (Show a) => Show (Lazy a) where
-  show x = "lazy(" ++ show x ++ ")"
+  show x = "Lazy " ++ show (force x)
 
 fix :: forall a. (Lazy a -> Lazy a) -> Lazy a
 fix f = f (defer $ \_ -> force $ fix f)
