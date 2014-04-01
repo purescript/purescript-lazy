@@ -35,6 +35,16 @@ instance applicativeLazy :: Applicative Lazy where
 
 instance functorLazy :: Functor Lazy where
   (<$>) f l = defer $ \_ -> f (force l)
+  
+instance eqLazy :: (Eq a) => Eq (Lazy a) where
+  (==) x y = (force x) == (force y)
+  (/=) x y = not (x == y)
+  
+instance ordLazy :: (Ord a) => Ord (Lazy a) where
+  compare x y = compare (force x) (force y)
+  
+instance showLazy :: (Show a) => Show (Lazy a) where
+  show x = "lazy(" ++ show x ++ ")"
 
 fix :: forall a. (Lazy a -> Lazy a) -> Lazy a
 fix f = f (defer $ \_ -> force $ fix f)
