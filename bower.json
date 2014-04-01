@@ -15,11 +15,15 @@
     "node_modules",
     "bower_components",
     "externs",
-    "js"
+    "js",
+    "tmp"
   ],
   "dependencies": {
     "purescript-foldable-traversable": "*",
     "purescript-monoid": "*",
     "purescript-arrays": "*"
+  },
+  "devDependencies": {
+    "purescript-quickcheck": "*"
   }
 }
