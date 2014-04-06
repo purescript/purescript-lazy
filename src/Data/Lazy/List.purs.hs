@@ -24,6 +24,13 @@ module Data.Lazy.List where
     (<>) Nil l = l
     (<>) l Nil = l
     (<>) (Cons x xs) ys = Cons x (defer \_ -> (force xs) <> ys)
+    
+  instance functorList :: Functor List where
+    (<$>) = liftA1
+
+  instance applicativeList :: Applicative List where
+    pure = return
+    (<*>) = ap
 
   instance monadList :: Monad List where
     return x = Cons x (defer \_ -> Nil)
