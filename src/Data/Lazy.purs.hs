@@ -3,21 +3,22 @@ module Data.Lazy where
 foreign import data Lazy :: * -> *
 
 foreign import defer 
-  "function defer(f) {\
-  \  return (function() {\
-  \    function Lazy(f) {\
-  \      var self = this;\
-  \      var value;\
-  \      self.force = function() {\
-  \        if (self.value === undefined) {\
-  \          self.value = f();\
-  \        }\
-  \        return self.value;\
-  \      };\
+  "function defer(thunk) {\
+  \    if (this instanceof defer) {\
+  \      this.thunk = thunk;\
+  \      return this;\
+  \    } else {\
+  \      return new defer(thunk);\
   \    }\
-  \    return new Lazy(f);\
-  \  }());\
-  \}" :: forall a. ({} -> a) -> Lazy a
+  \}\
+  \defer.prototype.force = function () {\
+  \    var value = this.thunk();\
+  \    delete this.thunk;\
+  \    this.force = function () {\
+  \        return value;\
+  \    };\
+  \    return value;\
+  \};" :: forall a. ({} -> a) -> Lazy a
 
 foreign import force
   "function force(l) {\
@@ -37,6 +38,16 @@ instance bindLazy :: Bind Lazy where
   (>>=) l f = defer $ \_ -> force <<< f <<< force $ l
 
 instance monadLazy :: Monad Lazy 
+  
+instance eqLazy :: (Eq a) => Eq (Lazy a) where
+  (==) x y = (force x) == (force y)
+  (/=) x y = not (x == y)
+  
+instance ordLazy :: (Ord a) => Ord (Lazy a) where
+  compare x y = compare (force x) (force y)
+  
+instance showLazy :: (Show a) => Show (Lazy a) where
+  show x = "Lazy " ++ show (force x)
 
 fix :: forall a. (Lazy a -> Lazy a) -> Lazy a
 fix f = f (defer $ \_ -> force $ fix f)
