@@ -9,41 +9,22 @@ module.exports = function(grunt) {
       "bower_components/purescript-*/src/**/*.purs",
     ],
     
-    clean: {
-      tests: ["tmp"],
-      lib: ["js", "externs"]
-    },
+    clean: ["output"],
   
-    "purescript-make": {
-      lib: {
-        src: "<%=libFiles%>"
-      }
-    },
-  
-    purescript: {
-      tests: {
-        options: {
-          module: ["Main"],
-          main: true
-        },
-        src: ["tests/Tests.purs", "<%=libFiles%>"],
-        dest: "tmp/tests.js"
-      }
-    },
-    
-    execute: {
-      tests: {
-        src: "tmp/tests.js"
-      }
+    pscMake: ["<%=libFiles%>"],
+    dotPsci: ["<%=libFiles%>"],
+    docgen: {
+        readme: {
+            src: "src/**/*.purs",
+            dest: "docs/Module.md"
+        }
     }
-      
+
   });
 
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-purescript");
-  grunt.loadNpmTasks("grunt-execute");
   
-  grunt.registerTask("test", ["clean:tests", "purescript:tests", "execute:tests"]);
-  grunt.registerTask("lib", ["purescript-make:lib"]);
-  grunt.registerTask("default", ["test", "lib"]);
+  grunt.registerTask("make", ["pscMake", "dotPsci", "docgen"]);
+  grunt.registerTask("default", ["make"]);
 };
