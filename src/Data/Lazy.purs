@@ -51,9 +51,6 @@ instance ordLazy :: (Ord a) => Ord (Lazy a) where
 instance showLazy :: (Show a) => Show (Lazy a) where
   show x = "Lazy " ++ show (force x)
 
-instance lazyLazy :: CL.Lazy (Lazy a) where
-  defer f = defer (\_ -> force (f unit))
-
 instance lazy1Lazy :: CL.Lazy1 Lazy where
   defer1 f = defer (\_ -> force (f unit))
 
