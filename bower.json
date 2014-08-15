@@ -23,7 +23,8 @@
   "dependencies": {
     "purescript-foldable-traversable": "*",
     "purescript-monoid": "*",
-    "purescript-arrays": "*"
+    "purescript-control": ">=0.2.0",
+    "purescript-arrays": ">=0.2.0"
   },
   "devDependencies": {
     "purescript-quickcheck": "*"

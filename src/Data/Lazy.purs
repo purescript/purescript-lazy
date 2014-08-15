@@ -1,5 +1,7 @@
 module Data.Lazy where
 
+import qualified Control.Lazy as CL
+
 foreign import data Lazy :: * -> *
 
 foreign import defer 
@@ -18,7 +20,7 @@ foreign import defer
   \        return value;\
   \    };\
   \    return value;\
-  \};" :: forall a. ({} -> a) -> Lazy a
+  \};" :: forall a. (Unit -> a) -> Lazy a
 
 foreign import force
   "function force(l) {\
@@ -49,5 +51,6 @@ instance ordLazy :: (Ord a) => Ord (Lazy a) where
 instance showLazy :: (Show a) => Show (Lazy a) where
   show x = "Lazy " ++ show (force x)
 
-fix :: forall a. (Lazy a -> Lazy a) -> Lazy a
-fix f = f (defer $ \_ -> force $ fix f)
+instance lazy1Lazy :: CL.Lazy1 Lazy where
+  defer1 f = defer (\_ -> force (f unit))
+

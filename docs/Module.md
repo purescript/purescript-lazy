@@ -19,6 +19,8 @@
 
     instance functorLazy :: Functor Lazy
 
+    instance lazy1Lazy :: CL.Lazy1 Lazy
+
     instance monadLazy :: Monad Lazy
 
     instance ordLazy :: (Ord a) => Ord (Lazy a)
@@ -28,9 +30,7 @@
 
 ### Values
 
-    defer :: forall a. ({  } -> a) -> Lazy a
-
-    fix :: forall a. (Lazy a -> Lazy a) -> Lazy a
+    defer :: forall a. (Unit -> a) -> Lazy a
 
     force :: forall a. Lazy a -> a
 
