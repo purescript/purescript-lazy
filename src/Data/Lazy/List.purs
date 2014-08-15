@@ -31,15 +31,18 @@ foreign import showItems
   \}" :: [String] -> String
 
 instance semigroupList :: Semigroup (List a) where
-  (<>) Nil l = l
-  (<>) l Nil = l
-  (<>) (Cons x xs) ys = Cons x (defer \_ -> (force xs) <> ys)
+  (<>) xs ys = xs <.> defer \_ -> ys
+
+(<.>) :: forall a. List a -> Lazy (List a) -> List a
+(<.>) Nil         ys = force ys
+(<.>) (Cons x xs) ys = Cons x ((\xs' -> xs' <.> ys) <$> xs)
 
 instance monoidList :: Monoid (List a) where
   mempty = Nil
   
 instance functorList :: Functor List where
-  (<$>) = liftA1
+  (<$>) f Nil = Nil
+  (<$>) f (Cons h t) = Cons (f h) (((<$>) f) <$> t)
 
 instance applyList :: Apply List where
   (<*>) = ap
@@ -49,7 +52,7 @@ instance applicativeList :: Applicative List where
 
 instance bindList :: Bind List where
   (>>=) Nil _ = Nil
-  (>>=) (Cons x xs) f = f x <> (force xs >>= f)
+  (>>=) (Cons x xs) f = f x <.> ((\xs' -> xs' >>= f) <$> xs)
 
 instance monadList :: Monad List
 
