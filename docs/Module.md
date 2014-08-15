@@ -21,8 +21,6 @@
 
     instance lazy1Lazy :: CL.Lazy1 Lazy
 
-    instance lazyLazy :: CL.Lazy (Lazy a)
-
     instance monadLazy :: Monad Lazy
 
     instance ordLazy :: (Ord a) => Ord (Lazy a)
