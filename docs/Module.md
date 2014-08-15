@@ -30,7 +30,7 @@
 
 ### Values
 
-    defer :: forall a. ({  } -> a) -> Lazy a
+    defer :: forall a. (Unit -> a) -> Lazy a
 
     force :: forall a. Lazy a -> a
 

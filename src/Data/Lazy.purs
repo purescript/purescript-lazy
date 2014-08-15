@@ -20,7 +20,7 @@ foreign import defer
   \        return value;\
   \    };\
   \    return value;\
-  \};" :: forall a. ({} -> a) -> Lazy a
+  \};" :: forall a. (Unit -> a) -> Lazy a
 
 foreign import force
   "function force(l) {\
