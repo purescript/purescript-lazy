@@ -24,7 +24,7 @@
     "purescript-foldable-traversable": "*",
     "purescript-monoid": "*",
     "purescript-control": ">=0.2.0",
-    "purescript-arrays": "*"
+    "purescript-arrays": ">=0.2.0"
   },
   "devDependencies": {
     "purescript-quickcheck": "*"
