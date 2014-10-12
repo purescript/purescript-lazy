@@ -15,7 +15,11 @@
 
     instance bindLazy :: Bind Lazy
 
+    instance comonadLazy :: Comonad Lazy
+
     instance eqLazy :: (Eq a) => Eq (Lazy a)
+
+    instance extendLazy :: Extend Lazy
 
     instance functorLazy :: Functor Lazy
 

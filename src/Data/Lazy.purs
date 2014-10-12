@@ -1,6 +1,8 @@
 module Data.Lazy where
 
 import qualified Control.Lazy as CL
+import Control.Extend
+import Control.Comonad
 
 foreign import data Lazy :: * -> *
 
@@ -40,6 +42,12 @@ instance bindLazy :: Bind Lazy where
   (>>=) l f = defer $ \_ -> force <<< f <<< force $ l
 
 instance monadLazy :: Monad Lazy 
+
+instance extendLazy :: Extend Lazy where
+  (<<=) f x = defer $ \_ -> f x
+
+instance comonadLazy :: Comonad Lazy where
+  extract = force
   
 instance eqLazy :: (Eq a) => Eq (Lazy a) where
   (==) x y = (force x) == (force y)
@@ -53,4 +61,3 @@ instance showLazy :: (Show a) => Show (Lazy a) where
 
 instance lazy1Lazy :: CL.Lazy1 Lazy where
   defer1 f = defer (\_ -> force (f unit))
-
