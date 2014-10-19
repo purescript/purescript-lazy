@@ -3,6 +3,7 @@
   "homepage": "https://github.com/purescript-contrib/purescript-lazy",
   "authors": [
     "Phil Freeman <paf31@cantab.net>",
+    "Gary Burgess <gary.burgess@gmail.com>",
     "John A. De Goes <john@degoes.net>"
   ],
   "description": "Call-by-need values",
