@@ -23,7 +23,7 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-foldable-traversable":  "~0.1.3",
+    "purescript-foldable-traversable":  "~0.1.6",
     "purescript-monoid":                "~0.1.4",
     "purescript-control":               "~0.2.1",
     "purescript-arrays":                "~0.3.0"
