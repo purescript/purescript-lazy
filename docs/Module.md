@@ -2,81 +2,209 @@
 
 ## Module Data.Lazy
 
-### Types
+#### `Lazy`
 
-    data Lazy :: * -> *
-
-
-### Type Class Instances
-
-    instance applicativeLazy :: Applicative Lazy
-
-    instance applyLazy :: Apply Lazy
-
-    instance bindLazy :: Bind Lazy
-
-    instance comonadLazy :: Comonad Lazy
-
-    instance eqLazy :: (Eq a) => Eq (Lazy a)
-
-    instance extendLazy :: Extend Lazy
-
-    instance functorLazy :: Functor Lazy
-
-    instance lazy1Lazy :: CL.Lazy1 Lazy
-
-    instance monadLazy :: Monad Lazy
-
-    instance ordLazy :: (Ord a) => Ord (Lazy a)
-
-    instance showLazy :: (Show a) => Show (Lazy a)
+``` purescript
+data Lazy :: * -> *
+```
 
 
-### Values
+#### `defer`
 
-    defer :: forall a. (Unit -> a) -> Lazy a
+``` purescript
+defer :: forall a. (Unit -> a) -> Lazy a
+```
 
-    force :: forall a. Lazy a -> a
+
+#### `force`
+
+``` purescript
+force :: forall a. Lazy a -> a
+```
+
+
+#### `functorLazy`
+
+``` purescript
+instance functorLazy :: Functor Lazy
+```
+
+
+#### `applyLazy`
+
+``` purescript
+instance applyLazy :: Apply Lazy
+```
+
+
+#### `applicativeLazy`
+
+``` purescript
+instance applicativeLazy :: Applicative Lazy
+```
+
+
+#### `bindLazy`
+
+``` purescript
+instance bindLazy :: Bind Lazy
+```
+
+
+#### `monadLazy`
+
+``` purescript
+instance monadLazy :: Monad Lazy
+```
+
+
+#### `extendLazy`
+
+``` purescript
+instance extendLazy :: Extend Lazy
+```
+
+
+#### `comonadLazy`
+
+``` purescript
+instance comonadLazy :: Comonad Lazy
+```
+
+
+#### `eqLazy`
+
+``` purescript
+instance eqLazy :: (Eq a) => Eq (Lazy a)
+```
+
+
+#### `ordLazy`
+
+``` purescript
+instance ordLazy :: (Ord a) => Ord (Lazy a)
+```
+
+
+#### `showLazy`
+
+``` purescript
+instance showLazy :: (Show a) => Show (Lazy a)
+```
+
+
+#### `lazy1Lazy`
+
+``` purescript
+instance lazy1Lazy :: CL.Lazy1 Lazy
+```
+
 
 
 ## Module Data.Lazy.List
 
-### Types
+#### `List`
 
-    data List a where
-      Nil :: List a
-      Cons :: a -> Lazy (List a) -> List a
-
-
-### Type Class Instances
-
-    instance applicativeList :: Applicative List
-
-    instance applyList :: Apply List
-
-    instance bindList :: Bind List
-
-    instance eqList :: (Eq a) => Eq (List a)
-
-    instance functorList :: Functor List
-
-    instance monadList :: Monad List
-
-    instance monoidList :: Monoid (List a)
-
-    instance semigroupList :: Semigroup (List a)
-
-    instance showList :: (Show a) => Show (List a)
+``` purescript
+data List a
+  = Nil 
+  | Cons a (Lazy (List a))
+```
 
 
-### Values
+#### `eqList`
 
-    drop :: forall a. Number -> List a -> List a
+``` purescript
+instance eqList :: (Eq a) => Eq (List a)
+```
 
-    fromArray :: forall a. [a] -> List a
 
-    repeat :: forall a. a -> List a
+#### `showList`
 
-    take :: forall a. Number -> List a -> List a
+``` purescript
+instance showList :: (Show a) => Show (List a)
+```
 
-    toArray :: forall a. List a -> [a]
+
+#### `semigroupList`
+
+``` purescript
+instance semigroupList :: Semigroup (List a)
+```
+
+
+#### `monoidList`
+
+``` purescript
+instance monoidList :: Monoid (List a)
+```
+
+
+#### `functorList`
+
+``` purescript
+instance functorList :: Functor List
+```
+
+
+#### `applyList`
+
+``` purescript
+instance applyList :: Apply List
+```
+
+
+#### `applicativeList`
+
+``` purescript
+instance applicativeList :: Applicative List
+```
+
+
+#### `bindList`
+
+``` purescript
+instance bindList :: Bind List
+```
+
+
+#### `monadList`
+
+``` purescript
+instance monadList :: Monad List
+```
+
+
+#### `toArray`
+
+``` purescript
+toArray :: forall a. List a -> [a]
+```
+
+
+#### `fromArray`
+
+``` purescript
+fromArray :: forall a. [a] -> List a
+```
+
+
+#### `repeat`
+
+``` purescript
+repeat :: forall a. a -> List a
+```
+
+
+#### `take`
+
+``` purescript
+take :: forall a. Number -> List a -> List a
+```
+
+
+#### `drop`
+
+``` purescript
+drop :: forall a. Number -> List a -> List a
+```
