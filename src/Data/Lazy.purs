@@ -1,11 +1,24 @@
+-- | A monad for lazily-computed values
+
 module Data.Lazy where
 
 import qualified Control.Lazy as CL
 import Control.Extend
 import Control.Comonad
 
+-- | `Lazy a` represents lazily-computed values of type `a`.
+-- |
+-- | A lazy value is computed at most once - the result is saved
+-- | after the first computation, and subsequent attempts to read
+-- | the value simply return the saved value.
+-- |
+-- | `Lazy` values can be created with `defer`, or by using the provided
+-- | type class instances.
+-- |
+-- | `Lazy` values can be evaluated by using the `force` function.
 foreign import data Lazy :: * -> *
 
+-- | Defer a computation, creating a `Lazy` value.
 foreign import defer 
   "function defer(thunk) {\
   \    if (this instanceof defer) {\
@@ -24,6 +37,7 @@ foreign import defer
   \    return value;\
   \};" :: forall a. (Unit -> a) -> Lazy a
 
+-- | Force evaluation of a `Lazy` value.
 foreign import force
   "function force(l) {\
   \  return l.force();\
