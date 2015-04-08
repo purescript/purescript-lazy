@@ -108,10 +108,10 @@ instance showLazy :: (Show a) => Show (Lazy a)
 ```
 
 
-#### `lazy1Lazy`
+#### `lazyLazy`
 
 ``` purescript
-instance lazy1Lazy :: CL.Lazy1 Lazy
+instance lazyLazy :: CL.Lazy (Lazy a)
 ```
 
 

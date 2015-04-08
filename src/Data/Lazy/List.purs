@@ -1,6 +1,6 @@
 -- | Lazy linked-lists
 
-module Data.Lazy.List 
+module Data.Lazy.List
   ( List(..)
   , toArray
   , fromArray
@@ -16,7 +16,7 @@ import Data.Monoid
 import Data.Traversable
 
 -- | A lazy linked list type.
--- | 
+-- |
 -- | This type is strict in its head element, but lazy in its tail.
 -- |
 -- | Various operations on lazy lists require evaluation of the entire list,
@@ -32,11 +32,13 @@ instance eqList :: (Eq a) => Eq (List a) where
 
 instance showList :: (Show a) => Show (List a) where
   show l = "List(" ++ showItems (map show (toArray l)) ++ ")"
-  
+
 foreign import showItems
-  "function showItems (l) {\
-  \  return l.join(', ');\
-  \}" :: [String] -> String
+  """
+  function showItems (l) {
+    return l.join(', ');
+  }
+  """ :: [String] -> String
 
 instance semigroupList :: Semigroup (List a) where
   (<>) xs ys = xs <.> defer \_ -> ys
@@ -47,7 +49,7 @@ instance semigroupList :: Semigroup (List a) where
 
 instance monoidList :: Monoid (List a) where
   mempty = Nil
-  
+
 instance functorList :: Functor List where
   (<$>) f Nil = Nil
   (<$>) f (Cons h t) = Cons (f h) (((<$>) f) <$> t)
@@ -67,14 +69,14 @@ instance monadList :: Monad List
 -- | Convert a lazy list into an immutable array. This function will
 -- | attempt to evaluate the entire list, so should only be used on
 -- | finite inputs.
--- | 
+-- |
 -- | Running time: `O(n)` where `n` is the number of elements in the list.
 toArray :: forall a. List a -> [a]
 toArray Nil = []
 toArray (Cons x xs) = x : toArray (force xs)
 
 -- | Create a lazy list from an immutable array.
--- | 
+-- |
 -- | Running time: `O(n)` where `n` is the number of elements in the array.
 fromArray :: forall a. [a] -> List a
 fromArray = foldr (\x xs -> Cons x (defer \_ -> xs)) Nil
