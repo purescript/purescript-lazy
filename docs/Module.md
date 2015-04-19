@@ -38,6 +38,111 @@ force :: forall a. Lazy a -> a
 
 Force evaluation of a `Lazy` value.
 
+#### `semiringLazy`
+
+``` purescript
+instance semiringLazy :: (Semiring a) => Semiring (Lazy a)
+```
+
+
+#### `ringLazy`
+
+``` purescript
+instance ringLazy :: (Ring a) => Ring (Lazy a)
+```
+
+
+#### `moduloSemiringLazy`
+
+``` purescript
+instance moduloSemiringLazy :: (ModuloSemiring a) => ModuloSemiring (Lazy a)
+```
+
+
+#### `divisionRingLazy`
+
+``` purescript
+instance divisionRingLazy :: (DivisionRing a) => DivisionRing (Lazy a)
+```
+
+
+#### `numLazy`
+
+``` purescript
+instance numLazy :: (Num a) => Num (Lazy a)
+```
+
+
+#### `eqLazy`
+
+``` purescript
+instance eqLazy :: (Eq a) => Eq (Lazy a)
+```
+
+
+#### `ordLazy`
+
+``` purescript
+instance ordLazy :: (Ord a) => Ord (Lazy a)
+```
+
+
+#### `boundedLazy`
+
+``` purescript
+instance boundedLazy :: (Bounded a) => Bounded (Lazy a)
+```
+
+
+#### `semigroupLazy`
+
+``` purescript
+instance semigroupLazy :: (Semigroup a) => Semigroup (Lazy a)
+```
+
+
+#### `monoidLazy`
+
+``` purescript
+instance monoidLazy :: (Monoid a) => Monoid (Lazy a)
+```
+
+
+#### `latticeLazy`
+
+``` purescript
+instance latticeLazy :: (Lattice a) => Lattice (Lazy a)
+```
+
+
+#### `boundedLatticeLazy`
+
+``` purescript
+instance boundedLatticeLazy :: (BoundedLattice a) => BoundedLattice (Lazy a)
+```
+
+
+#### `complementedLatticeLazy`
+
+``` purescript
+instance complementedLatticeLazy :: (ComplementedLattice a) => ComplementedLattice (Lazy a)
+```
+
+
+#### `distributiveLatticeLazy`
+
+``` purescript
+instance distributiveLatticeLazy :: (DistributiveLattice a) => DistributiveLattice (Lazy a)
+```
+
+
+#### `booleanAlgebraLazy`
+
+``` purescript
+instance booleanAlgebraLazy :: (BooleanAlgebra a) => BooleanAlgebra (Lazy a)
+```
+
+
 #### `functorLazy`
 
 ``` purescript
@@ -84,20 +189,6 @@ instance extendLazy :: Extend Lazy
 
 ``` purescript
 instance comonadLazy :: Comonad Lazy
-```
-
-
-#### `eqLazy`
-
-``` purescript
-instance eqLazy :: (Eq a) => Eq (Lazy a)
-```
-
-
-#### `ordLazy`
-
-``` purescript
-instance ordLazy :: (Ord a) => Ord (Lazy a)
 ```
 
 
