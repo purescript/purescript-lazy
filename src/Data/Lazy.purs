@@ -2,6 +2,8 @@
 
 module Data.Lazy where
 
+import Prelude
+
 import Control.Comonad (Comonad)
 import Control.Extend (Extend)
 import Data.Monoid (Monoid, mempty)
@@ -20,45 +22,22 @@ import qualified Control.Lazy as CL
 foreign import data Lazy :: * -> *
 
 -- | Defer a computation, creating a `Lazy` value.
-foreign import defer
-  """
-  function defer(thunk) {
-    if (this instanceof defer) {
-      this.thunk = thunk;
-      return this;
-    } else {
-      return new defer(thunk);
-    }
-  }
-  defer.prototype.force = function () {
-    var value = this.thunk();
-    delete this.thunk;
-    this.force = function () {
-        return value;
-    };
-    return value;
-  };
-  """ :: forall a. (Unit -> a) -> Lazy a
+foreign import defer :: forall a. (Unit -> a) -> Lazy a
 
 -- | Force evaluation of a `Lazy` value.
-foreign import force
-  """
-  function force(l) {
-    return l.force();
-  }
-  """ :: forall a. Lazy a -> a
+foreign import force :: forall a. Lazy a -> a
 
 instance semiringLazy :: (Semiring a) => Semiring (Lazy a) where
-  (+) a b = defer \_ -> force a + force b
+  add a b = defer \_ -> force a + force b
   zero = defer \_ -> zero
-  (*) a b = defer \_ -> force a * force b
+  mul a b = defer \_ -> force a * force b
   one = defer \_ -> one
 
 instance ringLazy :: (Ring a) => Ring (Lazy a) where
-  (-) a b = defer \_ -> force a - force b
+  sub a b = defer \_ -> force a - force b
 
 instance moduloSemiringLazy :: (ModuloSemiring a) => ModuloSemiring (Lazy a) where
-  (/) a b = defer \_ -> force a / force b
+  div a b = defer \_ -> force a / force b
   mod a b = defer \_ -> force a `mod` force b
 
 instance divisionRingLazy :: (DivisionRing a) => DivisionRing (Lazy a)
@@ -66,8 +45,7 @@ instance divisionRingLazy :: (DivisionRing a) => DivisionRing (Lazy a)
 instance numLazy :: (Num a) => Num (Lazy a)
 
 instance eqLazy :: (Eq a) => Eq (Lazy a) where
-  (==) x y = (force x) == (force y)
-  (/=) x y = not (x == y)
+  eq x y = (force x) == (force y)
 
 instance ordLazy :: (Ord a) => Ord (Lazy a) where
   compare x y = compare (force x) (force y)
@@ -77,40 +55,32 @@ instance boundedLazy :: (Bounded a) => Bounded (Lazy a) where
   bottom = defer \_ -> bottom
 
 instance semigroupLazy :: (Semigroup a) => Semigroup (Lazy a) where
-  (<>) a b = defer \_ -> force a <> force b
+  append a b = defer \_ -> force a <> force b
 
 instance monoidLazy :: (Monoid a) => Monoid (Lazy a) where
   mempty = defer \_ -> mempty
 
-instance latticeLazy :: (Lattice a) => Lattice (Lazy a) where
-  sup a b = defer \_ -> force a `sup` force b
-  inf a b = defer \_ -> force a `inf` force b
-
-instance boundedLatticeLazy :: (BoundedLattice a) => BoundedLattice (Lazy a)
-
-instance complementedLatticeLazy :: (ComplementedLattice a) => ComplementedLattice (Lazy a) where
-  not a = defer \_ -> not (force a)
-
-instance distributiveLatticeLazy :: (DistributiveLattice a) => DistributiveLattice (Lazy a)
-
-instance booleanAlgebraLazy :: (BooleanAlgebra a) => BooleanAlgebra (Lazy a)
-
+instance booleanAlgebraLazy :: (BooleanAlgebra a) => BooleanAlgebra (Lazy a) where
+  conj a b = conj <$> a <*> b
+  disj a b = disj <$> a <*> b
+  not a = not <$> a
+  
 instance functorLazy :: Functor Lazy where
-  (<$>) f l = defer \_ -> f (force l)
+  map f l = defer \_ -> f (force l)
 
 instance applyLazy :: Apply Lazy where
-  (<*>) f x = defer \_ -> force f $ force x
+  apply f x = defer \_ -> force f $ force x
 
 instance applicativeLazy :: Applicative Lazy where
   pure a = defer \_ -> a
 
 instance bindLazy :: Bind Lazy where
-  (>>=) l f = defer \_ -> force <<< f <<< force $ l
+  bind l f = defer \_ -> force <<< f <<< force $ l
 
 instance monadLazy :: Monad Lazy
 
 instance extendLazy :: Extend Lazy where
-  (<<=) f x = defer \_ -> f x
+  extend f x = defer \_ -> f x
 
 instance comonadLazy :: Comonad Lazy where
   extract = force
