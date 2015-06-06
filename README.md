@@ -12,4 +12,4 @@ bower install purescript-lazy
 
 ## Module documentation
 
-[`docs/Module.md`](docs/Module.md)
+- [Data.Lazy](docs/Data.Lazy.md)

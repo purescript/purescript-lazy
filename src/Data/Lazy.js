@@ -3,24 +3,30 @@
 
 // module Data.Lazy
 
-exports.defer = function(thunk) {
-  if (this instanceof defer) {
-    this.thunk = thunk;
-    return this;
-  } else {
-    return new defer(thunk);
+exports.defer = function () {
+
+  function Defer (thunk) {
+    if (this instanceof Defer) {
+      this.thunk = thunk;
+      return this;
+    } else {
+      return new Defer(thunk);
+    }
   }
-};
 
-exports.defer.prototype.force = function () {
-  var value = this.thunk();
-  delete this.thunk;
-  this.force = function () {
+  Defer.prototype.force = function () {
+    var value = this.thunk();
+    delete this.thunk;
+    this.force = function () {
       return value;
+    };
+    return value;
   };
-  return value;
-};
 
-exports.force = function(l) {
+  return Defer;
+
+}();
+
+exports.force = function (l) {
   return l.force();
 };

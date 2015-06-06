@@ -21,6 +21,6 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-monoid": "~0.3.0"
+    "purescript-monoid": "^0.3.0"
   }
 }
