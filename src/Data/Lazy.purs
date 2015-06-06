@@ -54,6 +54,8 @@ instance boundedLazy :: (Bounded a) => Bounded (Lazy a) where
   top = defer \_ -> top
   bottom = defer \_ -> bottom
 
+instance boundedOrdLazy :: (BoundedOrd a) => BoundedOrd (Lazy a)
+
 instance semigroupLazy :: (Semigroup a) => Semigroup (Lazy a) where
   append a b = defer \_ -> force a <> force b
 
@@ -64,7 +66,7 @@ instance booleanAlgebraLazy :: (BooleanAlgebra a) => BooleanAlgebra (Lazy a) whe
   conj a b = conj <$> a <*> b
   disj a b = disj <$> a <*> b
   not a = not <$> a
-  
+
 instance functorLazy :: Functor Lazy where
   map f l = defer \_ -> f (force l)
 
