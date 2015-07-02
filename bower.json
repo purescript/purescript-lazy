@@ -1,6 +1,6 @@
 {
   "name": "purescript-lazy",
-  "homepage": "https://github.com/purescript-contrib/purescript-lazy",
+  "homepage": "https://github.com/purescript/purescript-lazy",
   "authors": [
     "Phil Freeman <paf31@cantab.net>",
     "Gary Burgess <gary.burgess@gmail.com>",
@@ -11,6 +11,10 @@
     "purescript"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/purescript/purescript-lazy.git"
+  },
   "ignore": [
     "**/.*",
     "bower_components",
