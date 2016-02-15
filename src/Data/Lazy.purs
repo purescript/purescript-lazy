@@ -2,12 +2,12 @@
 
 module Data.Lazy where
 
-import Prelude
+import Prelude (class Show, class Monad, class Bind, class Applicative, class Apply, class Functor, class BooleanAlgebra, class Semigroup, class BoundedOrd, class Bounded, class Ord, class Eq, class Num, class DivisionRing, class ModuloSemiring, class Ring, class Semiring, Unit, unit, show, (++), ($), (<<<), not, (<$>), (<*>), disj, conj, (<>), bottom, top, compare, (==), mod, (/), (-), one, (*), zero, (+))
 
-import Control.Comonad (Comonad)
-import Control.Extend (Extend)
-import Data.Monoid (Monoid, mempty)
-import qualified Control.Lazy as CL
+import Control.Comonad (class Comonad)
+import Control.Extend (class Extend)
+import Data.Monoid (class Monoid, mempty)
+import Control.Lazy as CL
 
 -- | `Lazy a` represents lazily-computed values of type `a`.
 -- |
