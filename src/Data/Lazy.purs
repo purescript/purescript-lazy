@@ -2,7 +2,7 @@
 
 module Data.Lazy where
 
-import Prelude (class Show, class Monad, class Bind, class Applicative, class Apply, class Functor, class BooleanAlgebra, class Semigroup, class BoundedOrd, class Bounded, class Ord, class Eq, class Num, class DivisionRing, class ModuloSemiring, class Ring, class Semiring, Unit, unit, show, (++), ($), (<<<), not, (<$>), (<*>), disj, conj, (<>), bottom, top, compare, (==), mod, (/), (-), one, (*), zero, (+))
+import Prelude (class Show, class Monad, class Bind, class Applicative, class Apply, class Functor, class BooleanAlgebra, class Semigroup, class BoundedOrd, class Bounded, class Ord, class Eq, class Num, class DivisionRing, class ModuloSemiring, class Ring, class Semiring, Unit, unit, show, append, ($), (<<<), not, (<$>), (<*>), disj, conj, (<>), bottom, top, compare, (==), mod, (/), (-), one, (*), zero, (+))
 
 import Control.Comonad (class Comonad)
 import Control.Extend (class Extend)
@@ -88,7 +88,7 @@ instance comonadLazy :: Comonad Lazy where
   extract = force
 
 instance showLazy :: (Show a) => Show (Lazy a) where
-  show x = "Lazy " ++ show (force x)
+  show x = "Lazy " `append` show (force x)
 
 instance lazyLazy :: CL.Lazy (Lazy a) where
   defer f = defer \_ -> force (f unit)
