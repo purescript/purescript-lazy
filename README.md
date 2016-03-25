@@ -12,6 +12,6 @@ Call-by-need values.
 bower install purescript-lazy
 ```
 
-## Module documentation
+## Documentation
 
-- [Data.Lazy](docs/Data/Lazy.md)
+Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-console).

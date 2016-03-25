@@ -7,9 +7,6 @@
     "John A. De Goes <john@degoes.net>"
   ],
   "description": "Call-by-need values",
-  "keywords": [
-    "purescript"
-  ],
   "license": "MIT",
   "repository": {
     "type": "git",

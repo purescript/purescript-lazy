@@ -1,13 +1,13 @@
--- | A monad for lazily-computed values
-
 module Data.Lazy where
 
-import Prelude (class Show, class Monad, class Bind, class Applicative, class Apply, class Functor, class BooleanAlgebra, class Semigroup, class BoundedOrd, class Bounded, class Ord, class Eq, class Num, class DivisionRing, class ModuloSemiring, class Ring, class Semiring, Unit, unit, show, append, ($), (<<<), not, (<$>), (<*>), disj, conj, (<>), bottom, top, compare, (==), mod, (/), (-), one, (*), zero, (+))
+import Prelude
 
 import Control.Comonad (class Comonad)
 import Control.Extend (class Extend)
-import Data.Monoid (class Monoid, mempty)
 import Control.Lazy as CL
+
+import Data.HeytingAlgebra (implies, ff, tt)
+import Data.Monoid (class Monoid, mempty)
 
 -- | `Lazy a` represents lazily-computed values of type `a`.
 -- |
@@ -36,13 +36,14 @@ instance semiringLazy :: (Semiring a) => Semiring (Lazy a) where
 instance ringLazy :: (Ring a) => Ring (Lazy a) where
   sub a b = defer \_ -> force a - force b
 
-instance moduloSemiringLazy :: (ModuloSemiring a) => ModuloSemiring (Lazy a) where
+instance commutativeRingLazy :: (CommutativeRing a) => CommutativeRing (Lazy a)
+
+instance euclideanRingLazy :: (EuclideanRing a) => EuclideanRing (Lazy a) where
+  degree = degree <<< force
   div a b = defer \_ -> force a / force b
   mod a b = defer \_ -> force a `mod` force b
 
-instance divisionRingLazy :: (DivisionRing a) => DivisionRing (Lazy a)
-
-instance numLazy :: (Num a) => Num (Lazy a)
+instance fieldLazy :: (Field a) => Field (Lazy a)
 
 instance eqLazy :: (Eq a) => Eq (Lazy a) where
   eq x y = (force x) == (force y)
@@ -54,30 +55,33 @@ instance boundedLazy :: (Bounded a) => Bounded (Lazy a) where
   top = defer \_ -> top
   bottom = defer \_ -> bottom
 
-instance boundedOrdLazy :: (BoundedOrd a) => BoundedOrd (Lazy a)
-
 instance semigroupLazy :: (Semigroup a) => Semigroup (Lazy a) where
   append a b = defer \_ -> force a <> force b
 
 instance monoidLazy :: (Monoid a) => Monoid (Lazy a) where
   mempty = defer \_ -> mempty
 
-instance booleanAlgebraLazy :: (BooleanAlgebra a) => BooleanAlgebra (Lazy a) where
+instance heytingAlgebraLazy :: (HeytingAlgebra a) => HeytingAlgebra (Lazy a) where
+  ff = defer \_ -> ff
+  tt = defer \_ -> tt
+  implies a b = implies <$> a <*> b
   conj a b = conj <$> a <*> b
   disj a b = disj <$> a <*> b
   not a = not <$> a
+
+instance booleanAlgebraLazy :: (BooleanAlgebra a) => BooleanAlgebra (Lazy a)
 
 instance functorLazy :: Functor Lazy where
   map f l = defer \_ -> f (force l)
 
 instance applyLazy :: Apply Lazy where
-  apply f x = defer \_ -> force f $ force x
+  apply f x = defer \_ -> force f (force x)
 
 instance applicativeLazy :: Applicative Lazy where
   pure a = defer \_ -> a
 
 instance bindLazy :: Bind Lazy where
-  bind l f = defer \_ -> force <<< f <<< force $ l
+  bind l f = defer \_ -> force $ f (force l)
 
 instance monadLazy :: Monad Lazy
 
@@ -88,7 +92,7 @@ instance comonadLazy :: Comonad Lazy where
   extract = force
 
 instance showLazy :: (Show a) => Show (Lazy a) where
-  show x = "Lazy " `append` show (force x)
+  show x = "(defer \\_ -> " <> show (force x) <> ")"
 
 instance lazyLazy :: CL.Lazy (Lazy a) where
   defer f = defer \_ -> force (f unit)
