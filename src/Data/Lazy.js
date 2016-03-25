@@ -5,7 +5,7 @@
 
 exports.defer = function () {
 
-  function Defer (thunk) {
+  function Defer(thunk) {
     if (this instanceof Defer) {
       this.thunk = thunk;
       return this;
