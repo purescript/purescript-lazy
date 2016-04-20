@@ -14,4 +14,4 @@ bower install purescript-lazy
 
 ## Documentation
 
-Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-console).
+Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-lazy).
