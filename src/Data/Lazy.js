@@ -16,7 +16,7 @@ exports.defer = function () {
 
   Defer.prototype.force = function () {
     var value = this.thunk();
-    delete this.thunk;
+    this.thunk = null;
     this.force = function () {
       return value;
     };
