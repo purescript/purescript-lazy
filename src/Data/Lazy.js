@@ -1,7 +1,4 @@
-/* global exports */
 "use strict";
-
-// module Data.Lazy
 
 exports.defer = function () {
 
