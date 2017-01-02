@@ -29,9 +29,9 @@ foreign import force :: forall a. Lazy a -> a
 
 instance semiringLazy :: (Semiring a) => Semiring (Lazy a) where
   add a b = defer \_ -> force a + force b
-  zero = defer \_ -> zero
+  zero = pure zero
   mul a b = defer \_ -> force a * force b
-  one = defer \_ -> one
+  one = pure one
 
 instance ringLazy :: (Ring a) => Ring (Lazy a) where
   sub a b = defer \_ -> force a - force b
@@ -52,18 +52,18 @@ instance ordLazy :: (Ord a) => Ord (Lazy a) where
   compare x y = compare (force x) (force y)
 
 instance boundedLazy :: (Bounded a) => Bounded (Lazy a) where
-  top = defer \_ -> top
-  bottom = defer \_ -> bottom
+  top = pure top
+  bottom = pure bottom
 
 instance semigroupLazy :: (Semigroup a) => Semigroup (Lazy a) where
   append a b = defer \_ -> force a <> force b
 
 instance monoidLazy :: (Monoid a) => Monoid (Lazy a) where
-  mempty = defer \_ -> mempty
+  mempty = pure mempty
 
 instance heytingAlgebraLazy :: (HeytingAlgebra a) => HeytingAlgebra (Lazy a) where
-  ff = defer \_ -> ff
-  tt = defer \_ -> tt
+  ff = pure ff
+  tt = pure tt
   implies a b = implies <$> a <*> b
   conj a b = conj <$> a <*> b
   disj a b = disj <$> a <*> b
