@@ -6,9 +6,9 @@ exports.defer = function (thunk) {
     if (thunk === undefined) return v;
 
     v = thunk();
-    thunk = undefined;
+    thunk = undefined; // eslint-disable-line no-param-reassign
     return v;
-  }
+  };
 };
 
 exports.force = function (l) {
