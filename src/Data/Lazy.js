@@ -1,29 +1,16 @@
 "use strict";
 
-exports.defer = function () {
+exports.defer = function (thunk) {
+  var v = null;
+  return function() {
+    if (thunk === undefined) return v;
 
-  function Defer(thunk) {
-    if (this instanceof Defer) {
-      this.thunk = thunk;
-      return this;
-    } else {
-      return new Defer(thunk);
-    }
-  }
-
-  Defer.prototype.force = function () {
-    var value = this.thunk();
-    this.thunk = null;
-    this.force = function () {
-      return value;
-    };
-    return value;
+    v = thunk();
+    thunk = undefined; // eslint-disable-line no-param-reassign
+    return v;
   };
-
-  return Defer;
-
-}();
+};
 
 exports.force = function (l) {
-  return l.force();
+  return l();
 };
