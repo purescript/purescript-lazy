@@ -23,7 +23,7 @@ import Data.Monoid (class Monoid, mempty)
 foreign import data Lazy :: Type -> Type
 
 -- | Defer a computation, creating a `Lazy` value.
-foreign import defer :: forall a. (Unit -> a) -> Lazy a
+foreign import defer :: forall a b. (a -> b) -> Lazy b
 
 -- | Force evaluation of a `Lazy` value.
 foreign import force :: forall a. Lazy a -> a
