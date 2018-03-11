@@ -21,6 +21,7 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-monoid": "^3.0.0"
+    "purescript-monoid": "^3.0.0",
+    "purescript-foldable-traversable": "^3.7.1"
   }
 }
