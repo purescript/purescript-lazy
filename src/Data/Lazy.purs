@@ -5,12 +5,13 @@ import Prelude
 import Control.Comonad (class Comonad)
 import Control.Extend (class Extend)
 import Control.Lazy as CL
+import Data.Eq (class Eq1)
 import Data.Foldable (class Foldable, foldMap, foldl, foldr)
 import Data.FoldableWithIndex (class FoldableWithIndex)
 import Data.Functor.Invariant (class Invariant, imapF)
 import Data.FunctorWithIndex (class FunctorWithIndex)
 import Data.HeytingAlgebra (implies, ff, tt)
-import Data.Monoid (class Monoid, mempty)
+import Data.Ord (class Ord1)
 import Data.Semigroup.Foldable (class Foldable1, fold1Default)
 import Data.Semigroup.Traversable (class Traversable1)
 import Data.Traversable (class Traversable, traverse)
@@ -55,8 +56,12 @@ instance fieldLazy :: Field a => Field (Lazy a)
 instance eqLazy :: Eq a => Eq (Lazy a) where
   eq x y = (force x) == (force y)
 
+derive instance eq1Lazy :: Eq1 Lazy
+
 instance ordLazy :: Ord a => Ord (Lazy a) where
   compare x y = compare (force x) (force y)
+
+derive instance ord1Lazy :: Ord1 Lazy
 
 instance boundedLazy :: Bounded a => Bounded (Lazy a) where
   top = defer \_ -> top
