@@ -5,10 +5,16 @@ import Prelude
 import Control.Comonad (class Comonad)
 import Control.Extend (class Extend)
 import Control.Lazy as CL
-
+import Data.Foldable (class Foldable, foldMap, foldl, foldr)
+import Data.FoldableWithIndex (class FoldableWithIndex)
 import Data.Functor.Invariant (class Invariant, imapF)
+import Data.FunctorWithIndex (class FunctorWithIndex)
 import Data.HeytingAlgebra (implies, ff, tt)
 import Data.Monoid (class Monoid, mempty)
+import Data.Semigroup.Foldable (class Foldable1, fold1Default)
+import Data.Semigroup.Traversable (class Traversable1)
+import Data.Traversable (class Traversable, traverse)
+import Data.TraversableWithIndex (class TraversableWithIndex)
 
 -- | `Lazy a` represents lazily-computed values of type `a`.
 -- |
@@ -74,6 +80,34 @@ instance booleanAlgebraLazy :: BooleanAlgebra a => BooleanAlgebra (Lazy a)
 
 instance functorLazy :: Functor Lazy where
   map f l = defer \_ -> f (force l)
+
+instance functorWithIndexLazy :: FunctorWithIndex Unit Lazy where
+  mapWithIndex f = map $ f unit
+
+instance foldableLazy :: Foldable Lazy where
+  foldr f z l = f (force l) z
+  foldl f z l = f z (force l)
+  foldMap f l = f (force l)
+
+instance foldableWithIndexLazy :: FoldableWithIndex Unit Lazy where
+  foldrWithIndex f = foldr $ f unit
+  foldlWithIndex f = foldl $ f unit
+  foldMapWithIndex f = foldMap $ f unit
+
+instance foldable1Lazy :: Foldable1 Lazy where
+  foldMap1 f l = f (force l)
+  fold1 = fold1Default
+
+instance traversableLazy :: Traversable Lazy where
+  traverse f l = defer <<< const <$> f (force l)
+  sequence l = defer <<< const <$> force l
+
+instance traversableWithIndexLazy :: TraversableWithIndex Unit Lazy where
+  traverseWithIndex f = traverse $ f unit
+
+instance traversable1Lazy :: Traversable1 Lazy where
+  traverse1 f l = defer <<< const <$> f (force l)
+  sequence1 l = defer <<< const <$> force l
 
 instance invariantLazy :: Invariant Lazy where
   imap = imapF
