@@ -51,8 +51,6 @@ instance euclideanRingLazy :: EuclideanRing a => EuclideanRing (Lazy a) where
   div a b = defer \_ -> force a / force b
   mod a b = defer \_ -> force a `mod` force b
 
-instance fieldLazy :: Field a => Field (Lazy a)
-
 instance eqLazy :: Eq a => Eq (Lazy a) where
   eq x y = (force x) == (force y)
 
