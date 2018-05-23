@@ -6,8 +6,7 @@
     "Gary Burgess <gary.burgess@gmail.com>",
     "John A. De Goes <john@degoes.net>"
   ],
-  "description": "Call-by-need values",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
     "url": "git://github.com/purescript/purescript-lazy.git"
@@ -21,6 +20,9 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-monoid": "^3.0.0"
+    "purescript-control": "^4.0.0",
+    "purescript-foldable-traversable": "^4.0.0",
+    "purescript-invariant": "^4.0.0",
+    "purescript-prelude": "^4.0.0"
   }
 }
