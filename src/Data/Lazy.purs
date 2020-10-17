@@ -29,6 +29,8 @@ import Data.TraversableWithIndex (class TraversableWithIndex)
 -- | `Lazy` values can be evaluated by using the `force` function.
 foreign import data Lazy :: Type -> Type
 
+type role Lazy representational
+
 -- | Defer a computation, creating a `Lazy` value.
 foreign import defer :: forall a. (Unit -> a) -> Lazy a
 
