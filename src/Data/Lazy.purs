@@ -101,7 +101,6 @@ instance foldableWithIndexLazy :: FoldableWithIndex Unit Lazy where
 
 instance foldable1Lazy :: Foldable1 Lazy where
   foldMap1 f l = f (force l)
-  fold1 = fold1Default
   foldr1 _ l = force l
   foldl1 _ l = force l
 
