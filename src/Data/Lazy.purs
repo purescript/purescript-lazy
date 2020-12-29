@@ -12,7 +12,7 @@ import Data.Functor.Invariant (class Invariant, imapF)
 import Data.FunctorWithIndex (class FunctorWithIndex)
 import Data.HeytingAlgebra (implies, ff, tt)
 import Data.Ord (class Ord1)
-import Data.Semigroup.Foldable (class Foldable1, fold1Default)
+import Data.Semigroup.Foldable (class Foldable1)
 import Data.Semigroup.Traversable (class Traversable1)
 import Data.Traversable (class Traversable, traverse)
 import Data.TraversableWithIndex (class TraversableWithIndex)
@@ -101,7 +101,6 @@ instance foldableWithIndexLazy :: FoldableWithIndex Unit Lazy where
 
 instance foldable1Lazy :: Foldable1 Lazy where
   foldMap1 f l = f (force l)
-  fold1 = fold1Default
   foldr1 _ l = force l
   foldl1 _ l = force l
 
