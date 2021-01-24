@@ -8,7 +8,7 @@ Breaking changes:
 - Added support for PureScript 0.14 and dropped support for all previous versions (#29)
 
 New features:
-- Added roles declarations to allow safe coercions
+- Added roles declarations to allow safe coercions (#28)
 
 Bugfixes:
 
