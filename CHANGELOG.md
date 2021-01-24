@@ -5,12 +5,17 @@ Notable changes to this project are documented in this file. The format is based
 ## [Unreleased]
 
 Breaking changes:
+- Added support for PureScript 0.14 and dropped support for all previous versions (#29)
 
 New features:
+- Added roles declarations to allow safe coercions
 
 Bugfixes:
 
 Other improvements:
+- Removed `fold1` member from `Foldable1` and added `foldr1` and `foldl1` (#30, #32)
+- Migrated CI to GitHub Actions and updated installation instructions to use Spago (#31)
+- Added a changelog and pull request template (#33)
 
 ## [v4.0.0](https://github.com/purescript/purescript-lazy/releases/tag/v4.0.0) - 2018-05-23
 
@@ -27,7 +32,7 @@ Other improvements:
 
 ## [v1.0.1](https://github.com/purescript/purescript-lazy/releases/tag/v1.0.1) - 2016-09-18
 
-- Avoid use of `delete` in JS implementation #16 (@rightfold)
+- Removed use of `delete` in JS implementation (#16 by @rightfold)
 
 ## [v1.0.0](https://github.com/purescript/purescript-lazy/releases/tag/v1.0.0) - 2016-06-01
 
@@ -47,17 +52,14 @@ This release is intended for the PureScript 0.9.1 compiler and newer.
 
 This release works with versions 0.7.\* of the PureScript compiler. It will not work with older versions. If you are using an older version, you should require an older, compatible version of this library.
 
-## [v0.4.0-rc.1](https://github.com/purescript/purescript-lazy/releases/tag/v0.4.0-rc.1) - 2015-06-06
-
-Initial release candidate of the library intended for the 0.7 compiler.
-
 ## [v0.3.1](https://github.com/purescript/purescript-lazy/releases/tag/v0.3.1) - 2015-03-19
 
-Update docs, improve running time of `fromArray`.
+- Updated docs, improved running time of `fromArray`.
 
 ## [v0.3.0](https://github.com/purescript/purescript-lazy/releases/tag/v0.3.0) - 2015-02-21
 
 **This release requires PureScript v0.6.8 or later**
+
 - Updated dependencies
 
 ## [v0.2.0](https://github.com/purescript/purescript-lazy/releases/tag/v0.2.0) - 2015-01-10
@@ -66,14 +68,13 @@ Update docs, improve running time of `fromArray`.
 
 ## [v0.1.2](https://github.com/purescript/purescript-lazy/releases/tag/v0.1.2) - 2014-12-11
 
-
+- Bumped `array` dependency
 
 ## [v0.1.1](https://github.com/purescript/purescript-lazy/releases/tag/v0.1.1) - 2014-10-19
 
-- Add `Extend` and `Comonad` instances (@natefaubion)
-- Remove quickcheck dependency and update dependency versions (@jdegoes)
+- Added `Extend` and `Comonad` instances (@natefaubion)
+- Removed quickcheck dependency and update dependency versions (@jdegoes)
 
 ## [v0.1.0](https://github.com/purescript/purescript-lazy/releases/tag/v0.1.0) - 2014-08-15
 
-
-
+- Initial versioned release
