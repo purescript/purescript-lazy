@@ -34,7 +34,8 @@ type role Lazy representational
 -- | Defer a computation, creating a `Lazy` value.
 foreign import defer :: forall a. (Unit -> a) -> Lazy a
 
--- | Force evaluation of a `Lazy` value.
+-- | Extract the result of a `Lazy` value by either forcing evaluation or
+-- | by retrieving the saved result of a previously forced evaluation.
 foreign import force :: forall a. Lazy a -> a
 
 instance semiringLazy :: Semiring a => Semiring (Lazy a) where
