@@ -1,5 +1,3 @@
-"use strict";
-
 export const defer = function (thunk) {
   var v = null;
   return function() {
