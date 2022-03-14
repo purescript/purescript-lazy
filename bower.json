@@ -20,9 +20,9 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-control": "^5.0.0",
-    "purescript-foldable-traversable": "^5.0.0",
-    "purescript-invariant": "^5.0.0",
-    "purescript-prelude": "^5.0.0"
+    "purescript-control": "master",
+    "purescript-foldable-traversable": "master",
+    "purescript-invariant": "master",
+    "purescript-prelude": "master"
   }
 }

@@ -1,6 +1,4 @@
-"use strict";
-
-exports.defer = function (thunk) {
+export const defer = function (thunk) {
   var v = null;
   return function() {
     if (thunk === undefined) return v;
@@ -11,6 +9,6 @@ exports.defer = function (thunk) {
   };
 };
 
-exports.force = function (l) {
+export const force = function (l) {
   return l();
 };
