@@ -12,7 +12,7 @@ Bugfixes:
 
 Other improvements:
 
-- Migrated from Bower/Pulp to Spago and updated CI, linting, and formatting.
+- Migrated from Bower/Pulp to Spago and updated CI, linting, and formatting. (#42 by @thomashoneyman)
 
 ## [v6.0.0](https://github.com/purescript/purescript-lazy/releases/tag/v6.0.0) - 2022-04-27
 
