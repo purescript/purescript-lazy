@@ -17,6 +17,7 @@ Other improvements:
 ## [v6.0.0](https://github.com/purescript/purescript-lazy/releases/tag/v6.0.0) - 2022-04-27
 
 Breaking changes:
+
 - Migrate FFI to ES modules (#39 by @kl0tl and @JordanMartinez)
 
 New features:
@@ -28,14 +29,17 @@ Other improvements:
 ## [v5.0.0](https://github.com/purescript/purescript-lazy/releases/tag/v5.0.0) - 2021-02-26
 
 Breaking changes:
+
 - Added support for PureScript 0.14 and dropped support for all previous versions (#29)
 
 New features:
+
 - Added roles declarations to allow safe coercions (#28)
 
 Bugfixes:
 
 Other improvements:
+
 - Removed `fold1` member from `Foldable1` and added `foldr1` and `foldl1` (#30, #32)
 - Migrated CI to GitHub Actions and updated installation instructions to use Spago (#31)
 - Added a changelog and pull request template (#33)
