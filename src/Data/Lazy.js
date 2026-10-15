@@ -4,7 +4,7 @@ export const defer = function (thunk) {
     if (thunk === undefined) return v;
 
     v = thunk();
-    thunk = undefined; // eslint-disable-line no-param-reassign
+    thunk = undefined;
     return v;
   };
 };
