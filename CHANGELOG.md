@@ -2,7 +2,7 @@
 
 Notable changes to this project are documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Unreleased](https://github.com/purescript/purescript-lazy/compare/v6.0.1...HEAD)
 
 Breaking changes:
 
@@ -23,6 +23,7 @@ Bugfixes:
 Other improvements:
 
 - Migrated from Bower/Pulp to Spago and updated CI, linting, and formatting. (#42 by @thomashoneyman)
+- Clarified the documentation for `force`. (#36 by @aranchelk)
 
 ## [v6.0.0](https://github.com/purescript/purescript-lazy/releases/tag/v6.0.0) - 2022-04-27
 
