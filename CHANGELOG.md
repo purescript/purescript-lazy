@@ -2,7 +2,7 @@
 
 Notable changes to this project are documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Unreleased](https://github.com/purescript/purescript-lazy/compare/v6.0.1...HEAD)
 
 Breaking changes:
 
@@ -12,9 +12,23 @@ Bugfixes:
 
 Other improvements:
 
+## [v6.0.1](https://github.com/purescript/purescript-lazy/releases/tag/v6.0.1) - 2026-10-17
+
+Breaking changes:
+
+New features:
+
+Bugfixes:
+
+Other improvements:
+
+- Migrated from Bower/Pulp to Spago and updated CI, linting, and formatting. (#42 by @thomashoneyman)
+- Clarified the documentation for `force`. (#36 by @aranchelk)
+
 ## [v6.0.0](https://github.com/purescript/purescript-lazy/releases/tag/v6.0.0) - 2022-04-27
 
 Breaking changes:
+
 - Migrate FFI to ES modules (#39 by @kl0tl and @JordanMartinez)
 
 New features:
@@ -26,14 +40,17 @@ Other improvements:
 ## [v5.0.0](https://github.com/purescript/purescript-lazy/releases/tag/v5.0.0) - 2021-02-26
 
 Breaking changes:
+
 - Added support for PureScript 0.14 and dropped support for all previous versions (#29)
 
 New features:
+
 - Added roles declarations to allow safe coercions (#28)
 
 Bugfixes:
 
 Other improvements:
+
 - Removed `fold1` member from `Foldable1` and added `foldr1` and `foldl1` (#30, #32)
 - Migrated CI to GitHub Actions and updated installation instructions to use Spago (#31)
 - Added a changelog and pull request template (#33)
